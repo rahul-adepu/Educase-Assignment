@@ -12,9 +12,40 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
+import axios from "axios";
 
 const Register = () => {
   const [agency, setAgency] = useState("");
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    phone: "",
+    companyName: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/user/register`,
+        formData
+      );
+
+      if (response.data.message === "User registered successfully") {
+        alert("Registered successfully!");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert(error.response?.data?.message || "Something went wrong");
+    }
+  };
 
   return (
     <Box
@@ -63,37 +94,8 @@ const Register = () => {
               variant="outlined"
               size="small"
               InputLabelProps={{ shrink: true }}
-            />
-
-            <TextField
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              variant="outlined"
-              size="small"
-              InputLabelProps={{ shrink: true }}
-            />
-
-            <TextField
-              required
-              fullWidth
-              id="password"
-              label="Password"
-              type="password"
-              variant="outlined"
-              size="small"
-              InputLabelProps={{ shrink: true }}
-            />
-
-            <TextField
-              required
-              fullWidth
-              id="company"
-              label="Company Name"
-              variant="outlined"
-              size="small"
-              InputLabelProps={{ shrink: true }}
+              value={formData.fullName}
+              onChange={handleChange}
             />
 
             <TextField
@@ -105,6 +107,45 @@ const Register = () => {
               variant="outlined"
               size="small"
               InputLabelProps={{ shrink: true }}
+              value={formData.phone}
+              onChange={handleChange}
+            />
+
+            <TextField
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              variant="outlined"
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={formData.email}
+              onChange={handleChange}
+            />
+
+            <TextField
+              required
+              fullWidth
+              id="password"
+              label="Password"
+              type="password"
+              variant="outlined"
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={formData.password}
+              onChange={handleChange}
+            />
+
+            <TextField
+              required
+              fullWidth
+              id="companyName"
+              label="Company Name"
+              variant="outlined"
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={formData.companyName}
+              onChange={handleChange}
             />
 
             <FormControl sx={{ mt: 1 }}>
@@ -139,7 +180,8 @@ const Register = () => {
         </Box>
 
         <Button
-          type="submit"
+          type="button"
+          onClick={handleSubmit}
           variant="contained"
           fullWidth
           sx={{
