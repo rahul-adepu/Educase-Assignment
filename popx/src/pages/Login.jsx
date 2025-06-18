@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -7,8 +7,42 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
+import axios from "axios";
 
 const Login = () => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setErrorMsg("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setErrorMsg("");
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/user/login`,
+        formData
+      );
+
+      const { fullName, email } = res.data.user;
+
+      localStorage.setItem("user", JSON.stringify({ fullName, email }));
+
+      console.log("Login Success:", res.data);
+    } catch (err) {
+      console.error("Login Failed:", err.response?.data || err.message);
+      setErrorMsg("Incorrect email or password");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Box
       minHeight="100vh"
@@ -42,47 +76,59 @@ const Login = () => {
           consectetur adipiscing elit,
         </Typography>
 
-        <Stack spacing={2}>
-          <TextField
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            variant="outlined"
-            size="small"
-            InputLabelProps={{ shrink: true }}
-          />
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={2}>
+            <TextField
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              variant="outlined"
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={formData.email}
+              onChange={handleChange}
+            />
 
-          <TextField
-            required
-            fullWidth
-            id="password"
-            label="Password"
-            type="password"
-            variant="outlined"
-            size="small"
-            InputLabelProps={{ shrink: true }}
-          />
+            <TextField
+              required
+              fullWidth
+              id="password"
+              label="Password"
+              type="password"
+              variant="outlined"
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={formData.password}
+              onChange={handleChange}
+              error={Boolean(errorMsg)}
+              helperText={errorMsg}
+              FormHelperTextProps={{
+                sx: { color: "#d32f2f", fontSize: "12px", mt: 0.5 },
+              }}
+            />
 
-          <Button
-            variant="contained"
-            fullWidth
-            disabled
-            sx={{
-              textTransform: "none",
-              bgcolor: "#CBCBCB",
-              color: "#000000",
-              fontWeight: 500,
-              fontSize: "14px",
-              py: 1.5,
-              "&:hover": {
-                bgcolor: "#CBCBCB",
-              },
-            }}
-          >
-            Login
-          </Button>
-        </Stack>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              disabled={loading}
+              sx={{
+                textTransform: "none",
+                bgcolor: "#6C25FF",
+                color: "#FFFFFF",
+                fontWeight: 500,
+                fontSize: "14px",
+                py: 1.5,
+                "&:hover": {
+                  bgcolor: "#5a1ee8",
+                },
+              }}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </Button>
+          </Stack>
+        </form>
       </Paper>
     </Box>
   );
