@@ -1,35 +1,80 @@
 import React from "react";
+import { Box, Typography, Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col justify-end px-6 pb-12 bg-white">
-      <div className="max-w-md w-full text-center mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Welcome to PopX
-        </h1>
-        <p className="text-gray-600 text-base mb-8">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <div className="flex flex-col gap-4">
-          <button
-            className="bg-purple-600 text-white py-3 rounded-md font-medium hover:bg-purple-700 transition"
+    <Box
+      minHeight="100vh"
+      display="flex"
+      flexDirection="column"
+      justifyContent="flex-end"
+      px={3}
+      pb={6}
+      bgcolor="background.default"
+    >
+      <Box maxWidth={360} width="100%" mx="auto" textAlign="left">
+        <Typography
+          variant="h5"
+          fontWeight={600}
+          fontSize="24px"
+          lineHeight="32px"
+          gutterBottom
+        >
+          Welcome to <strong>PopX</strong>
+        </Typography>
+
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          fontSize="14px"
+          lineHeight="20px"
+          mb={4}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          <br />
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </Typography>
+
+        <Stack spacing={2}>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
             onClick={() => navigate("/signup")}
+            sx={{
+              textTransform: "none",
+              borderRadius: 2,
+              fontSize: "16px",
+              fontWeight: "600",
+              py: 1.8,
+            }}
           >
             Create Account
-          </button>
-          <button
-            className="bg-purple-100 text-purple-700 py-3 rounded-md font-medium hover:bg-purple-200 transition"
+          </Button>
+
+          <Button
+            variant="outlined"
+            color="primary"
+            fullWidth
             onClick={() => navigate("/login")}
+            sx={{
+              textTransform: "none",
+              borderRadius: 2,
+              fontSize: "16px",
+              fontWeight: "600",
+              py: 1.8,
+              borderColor: "#6C25FF",
+              color: "#6C25FF",
+            }}
           >
             Already Registered? Login
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Stack>
+      </Box>
+    </Box>
   );
 };
 
