@@ -27,7 +27,7 @@ const Profile = () => {
       <Box maxWidth={360} mx="auto">
         <Paper
           sx={{
-            minHeight: "92vh",
+            minHeight: "90vh",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
