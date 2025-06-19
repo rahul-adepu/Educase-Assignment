@@ -24,7 +24,7 @@ const Profile = () => {
 
   return (
     <Box minHeight="100vh" bgcolor="#F7F8F9" px={3} py={4}>
-      <Box maxWidth={400} mx="auto">
+      <Box maxWidth={360} mx="auto">
         <Paper
           sx={{
             minHeight: "92vh",
@@ -37,16 +37,13 @@ const Profile = () => {
             bgcolor: "#FFFFFF",
           }}
         >
-          {/* Account Settings Header inside box */}
           <Box px={3} py={2} borderBottom="1px solid #F0F0F0">
             <Typography fontSize="18px" fontWeight={600}>
               Account Settings
             </Typography>
           </Box>
 
-          {/* Content */}
           <Box px={3} py={3} flexGrow={1}>
-            {/* Avatar and User Info */}
             <Box display="flex" alignItems="center" mb={3}>
               <Box position="relative">
                 <Avatar
@@ -80,7 +77,6 @@ const Profile = () => {
               </Box>
             </Box>
 
-            {/* Lorem Text */}
             <Typography
               variant="body2"
               fontSize="10px"
@@ -92,7 +88,6 @@ const Profile = () => {
               enim ad minim veniam, quis nostrud exercitation ullamco laboris.
             </Typography>
 
-            {/* Dotted Divider */}
             <Box mt={3} px={0}>
               <Divider
                 sx={{
@@ -103,7 +98,6 @@ const Profile = () => {
             </Box>
           </Box>
 
-          {/* Bottom Border */}
           <Box marginBottom="30px" width="100%">
             <Divider
               sx={{

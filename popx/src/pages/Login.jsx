@@ -55,11 +55,13 @@ const Login = () => {
       <Paper
         elevation={0}
         sx={{
+          minHeight: "92vh",
           width: "100%",
           maxWidth: 360,
           p: 3,
           border: "1px solid #D9D9D9",
           borderRadius: 2,
+          mb: 4,
         }}
       >
         <Typography variant="h6" fontWeight={600} gutterBottom>

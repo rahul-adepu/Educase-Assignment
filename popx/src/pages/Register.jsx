@@ -52,12 +52,13 @@ const Register = () => {
 
   return (
     <Box
-      minHeight="100vh"
+      height="100vh"
       bgcolor="background.default"
-      px={3}
-      pt={6}
+      px={2}
+      pt={2}
       display="flex"
       justifyContent="center"
+      alignItems="center"
     >
       <Paper
         elevation={0}
@@ -67,10 +68,11 @@ const Register = () => {
           p: 3,
           border: "1px solid #D9D9D9",
           borderRadius: 2,
+          mb: 2,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          minHeight: "calc(100vh - 48px)",
+          minHeight: "92vh",
         }}
       >
         <Box>
@@ -140,7 +142,6 @@ const Register = () => {
             />
 
             <TextField
-              required
               fullWidth
               id="companyName"
               label="Company Name"
