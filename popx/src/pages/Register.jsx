@@ -12,9 +12,11 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [agency, setAgency] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
@@ -39,11 +41,12 @@ const Register = () => {
       );
 
       if (response.data.message === "User registered successfully") {
-        alert("Registered successfully!");
+        const { fullName, email } = formData;
+        localStorage.setItem("user", JSON.stringify({ fullName, email }));
+        navigate("/profile");
       }
     } catch (error) {
-      console.error("Registration error:", error);
-      alert(error.response?.data?.message || "Something went wrong");
+      alert(error.response?.data?.message || "Registration failed");
     }
   };
 
