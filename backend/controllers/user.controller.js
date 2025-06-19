@@ -13,7 +13,7 @@ const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(
       password,
-      process.env.SALT_ROUNDSs
+      parseInt(process.env.SALT_ROUNDS)
     );
 
     const user = new User({
