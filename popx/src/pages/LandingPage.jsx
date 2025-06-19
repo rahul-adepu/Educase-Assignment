@@ -20,7 +20,7 @@ const LandingPage = () => {
         sx={{
           width: "100%",
           maxWidth: 360,
-          minHeight: "92vh",
+          minHeight: "91vh",
           border: "1px solid #D9D9D9",
           borderRadius: 2,
           p: 3,

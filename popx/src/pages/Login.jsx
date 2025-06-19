@@ -55,7 +55,7 @@ const Login = () => {
       <Paper
         elevation={0}
         sx={{
-          minHeight: "92vh",
+          minHeight: "90vh",
           width: "100%",
           maxWidth: 360,
           p: 3,
